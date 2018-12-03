@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <string>
-
-struct WeightRepSet
+ref struct WeightRepSet
 {
 public:
+
+	WeightRepSet(const WeightRepSet^ &aCopier);
+
 	void SetWeight(short aWeight) { weight = aWeight; }
 	short GetWeight() { return weight; }
 
@@ -20,14 +20,16 @@ private:
 	short numSets = 1;
 };
 
-class Exercise
+ref class Exercise
 {
 public:
-	std::string m_Name = "";
+	Exercise();
+	Exercise(const Exercise^ &aCopier);
+	System::String^ m_Name;
 	void AddWeightRepSet(short aWeight, short aReps, short aSets);
-	void AddWeightRepSet(WeightRepSet aWeightRepSet);
-	void SetWeightRepSet(std::vector<WeightRepSet> aWeightRepSet);
-	std::vector<WeightRepSet> GetWeightRepSet();
+	void AddWeightRepSet(WeightRepSet^ aWeightRepSet);
+	void SetWeightRepSet(System::Collections::Generic::List<WeightRepSet^> aWeightRepSet);
+	System::Collections::Generic::List<WeightRepSet^> GetWeightRepSet();
 private:
-	std::vector<WeightRepSet> m_WeightRepSet;
+	System::Collections::Generic::List<WeightRepSet^> m_WeightRepSet;
 };

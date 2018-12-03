@@ -3,16 +3,19 @@
 #include "Date.h"
 #include "Exercise.h"
 
-class Workout
+ref class Workout
 {
 public:
-	void SetDate(Date aDate);
-	Date GetDate();
 
-	void AddExercise(Exercise aExercise);
-	void SetExercises(std::vector<Exercise> aExercises);
-	std::vector<Exercise> GetExercise();
+	Workout(const Workout^ &aCopier);
+
+	void SetDate(Date^ aDate);
+	Date^ GetDate();
+
+	void AddExercise(Exercise^ aExercise);
+	void SetExercises(System::Collections::Generic::List<Exercise^> aExercises);
+	System::Collections::Generic::List<Exercise^> GetExercise();
 private:
-	Date m_Date;
-	std::vector<Exercise> m_Exercises;
+	Date^ m_Date;
+	System::Collections::Generic::List<Exercise^> m_Exercises;
 };

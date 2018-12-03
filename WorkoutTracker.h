@@ -27,6 +27,8 @@ namespace WorkoutTracker {
 			//
 		}
 
+	public: Workout^ workout;
+
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -52,6 +54,8 @@ namespace WorkoutTracker {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  DateTestLabel;
 	private: System::Windows::Forms::Label^  ExerciseTestLabel;
+	private: System::Windows::Forms::Button^  AddNewWeightRepSetButton;
+
 
 
 	private:
@@ -80,6 +84,7 @@ namespace WorkoutTracker {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->DateTestLabel = (gcnew System::Windows::Forms::Label());
 			this->ExerciseTestLabel = (gcnew System::Windows::Forms::Label());
+			this->AddNewWeightRepSetButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -143,6 +148,8 @@ namespace WorkoutTracker {
 			// 
 			// label1
 			// 
+			this->label1->AccessibleDescription = L"WeightRepSet";
+			this->label1->AccessibleName = L"WeightRepSet";
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -154,6 +161,8 @@ namespace WorkoutTracker {
 			// 
 			// WeightTextBox
 			// 
+			this->WeightTextBox->AccessibleDescription = L"WeightRepSet";
+			this->WeightTextBox->AccessibleName = L"WeightRepSet";
 			this->WeightTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->WeightTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
@@ -167,6 +176,8 @@ namespace WorkoutTracker {
 			// 
 			// RepsTextBox
 			// 
+			this->RepsTextBox->AccessibleDescription = L"WeightRepSet";
+			this->RepsTextBox->AccessibleName = L"WeightRepSet";
 			this->RepsTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->RepsTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
@@ -180,6 +191,8 @@ namespace WorkoutTracker {
 			// 
 			// RepsLabel
 			// 
+			this->RepsLabel->AccessibleDescription = L"WeightRepSet";
+			this->RepsLabel->AccessibleName = L"WeightRepSet";
 			this->RepsLabel->AutoSize = true;
 			this->RepsLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -191,6 +204,8 @@ namespace WorkoutTracker {
 			// 
 			// SetsTextBox
 			// 
+			this->SetsTextBox->AccessibleDescription = L"WeightRepSet";
+			this->SetsTextBox->AccessibleName = L"WeightRepSet";
 			this->SetsTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->SetsTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
@@ -204,6 +219,8 @@ namespace WorkoutTracker {
 			// 
 			// label2
 			// 
+			this->label2->AccessibleDescription = L"WeightRepSet";
+			this->label2->AccessibleName = L"WeightRepSet";
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -235,12 +252,25 @@ namespace WorkoutTracker {
 			this->ExerciseTestLabel->Size = System::Drawing::Size(0, 23);
 			this->ExerciseTestLabel->TabIndex = 9;
 			// 
+			// AddNewWeightRepSetButton
+			// 
+			this->AddNewWeightRepSetButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->AddNewWeightRepSetButton->Location = System::Drawing::Point(280, 311);
+			this->AddNewWeightRepSetButton->Name = L"AddNewWeightRepSetButton";
+			this->AddNewWeightRepSetButton->Size = System::Drawing::Size(89, 37);
+			this->AddNewWeightRepSetButton->TabIndex = 10;
+			this->AddNewWeightRepSetButton->Text = L"Add Another Weight/Rep/Set";
+			this->AddNewWeightRepSetButton->UseVisualStyleBackColor = true;
+			this->AddNewWeightRepSetButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewWeightRepSetButton_Click);
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->AddNewWeightRepSetButton);
 			this->Controls->Add(this->ExerciseTestLabel);
 			this->Controls->Add(this->DateTestLabel);
 			this->Controls->Add(this->SetsTextBox);
@@ -266,8 +296,7 @@ namespace WorkoutTracker {
 	}
 
 	private: System::Void AddWorkoutButton_Click(System::Object^  sender, System::EventArgs^  e) {
-		Workout workout;
-		
+
 		{ // Add the date of the workout
 			std::string date = msclr::interop::marshal_as<std::string>(DateTextBox->Text); // msclr::interop::marshal_as<> lets me convertfrom System types to std types
 			std::string segment;
@@ -286,16 +315,14 @@ namespace WorkoutTracker {
 			short month = (short)(std::stoi(seglist.at(1)));
 			short year = (short)(std::stoi(seglist.at(2)));
 
-			Date newDate;
-			newDate.SetDate(day, month, year);
+			Date^ newDate;
+			newDate->SetDate(day, month, year);
 
-			workout.SetDate(newDate);
-
-			DateTestLabel->Text = "The date of your workout was " + workout.GetDate().GetDay() + "/" + workout.GetDate().GetMonth() + "/" + workout.GetDate().GetYear() + ".";
+			workout->SetDate(newDate);
 		}
 
 		{ // Add the Exercise
-			std::string exerciseName = msclr::interop::marshal_as<std::string>(ExerciseTextBox->Text);
+			String^ exerciseName = ExerciseTextBox->Text;
 			std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
 			std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
 			std::string sNumSets = msclr::interop::marshal_as<std::string>(SetsTextBox->Text);
@@ -304,9 +331,12 @@ namespace WorkoutTracker {
 			short numReps = (short)(std::stoi(sNumReps));
 			short numSets = (short)(std::stoi(sNumSets));
 
-			Exercise newExercise;
-			newExercise.m_Name = exerciseName;
-			newExercise.AddWeightRepSet(weight, numReps, numSets);	}
+			Exercise^ newExercise;
+			newExercise->m_Name = exerciseName;
+			newExercise->AddWeightRepSet(weight, numReps, numSets);	
+
+			workout->AddExercise(newExercise);
+		}
 	}
 
 	private: System::Void DateTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -326,5 +356,22 @@ namespace WorkoutTracker {
 	}
 	private: System::Void WorkoutTracker_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
-};
+	private: System::Void AddNewWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		String^ exerciseName = ExerciseTextBox->Text;
+		std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
+		std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
+		std::string sNumSets = msclr::interop::marshal_as<std::string>(SetsTextBox->Text);
+
+		short weight = (short)(std::stoi(sWeight));
+		short numReps = (short)(std::stoi(sNumReps));
+		short numSets = (short)(std::stoi(sNumSets));
+
+		Exercise^ newExercise;
+		newExercise->m_Name = exerciseName;
+		newExercise->AddWeightRepSet(weight, numReps, numSets);
+
+		workout->AddExercise(newExercise);
+	}
+	};
 }
