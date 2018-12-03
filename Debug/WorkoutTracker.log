@@ -1,3 +1,7 @@
-﻿  WorkoutTracker.cpp
+﻿  Date.cpp
+  Exercise.cpp
+  Workout.cpp
+  WorkoutTracker.cpp
+  Generating Code...
   Date.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   WorkoutTracker.vcxproj -> D:\Users\Griffyn\C++\WorkoutTracker\Debug\WorkoutTracker.exe

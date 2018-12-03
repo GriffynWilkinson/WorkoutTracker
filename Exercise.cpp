@@ -4,9 +4,9 @@
 void Exercise::AddWeightRepSet(short aWeight, short aReps, short aSets)
 {
 	WeightRepSet weightRepSet;
-	weightRepSet.weight = aWeight;
-	weightRepSet.numReps = aReps;
-	weightRepSet.numSets = aSets;
+	weightRepSet.SetWeight(aWeight);
+	weightRepSet.SetReps(aReps);
+	weightRepSet.SetSets(aSets);
 
 	m_WeightRepSet.push_back(weightRepSet);
 }

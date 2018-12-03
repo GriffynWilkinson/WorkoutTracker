@@ -5,6 +5,16 @@
 
 struct WeightRepSet
 {
+public:
+	void SetWeight(short aWeight) { weight = aWeight; }
+	short GetWeight() { return weight; }
+
+	void SetReps(short aReps) { numReps = aReps; }
+	short GetReps() { return numReps; }
+
+	void SetSets(short aSets) { numSets = aSets; }
+	short GetSets() { return numSets; }
+private:
 	short weight = 0;
 	short numReps = 1;
 	short numSets = 1;

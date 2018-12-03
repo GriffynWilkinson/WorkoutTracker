@@ -51,6 +51,7 @@ namespace WorkoutTracker {
 	private: System::Windows::Forms::TextBox^  SetsTextBox;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  DateTestLabel;
+	private: System::Windows::Forms::Label^  ExerciseTestLabel;
 
 
 	private:
@@ -78,6 +79,7 @@ namespace WorkoutTracker {
 			this->SetsTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->DateTestLabel = (gcnew System::Windows::Forms::Label());
+			this->ExerciseTestLabel = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -222,12 +224,24 @@ namespace WorkoutTracker {
 			this->DateTestLabel->Size = System::Drawing::Size(0, 23);
 			this->DateTestLabel->TabIndex = 8;
 			// 
+			// ExerciseTestLabel
+			// 
+			this->ExerciseTestLabel->AutoSize = true;
+			this->ExerciseTestLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 15.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ExerciseTestLabel->ForeColor = System::Drawing::Color::Red;
+			this->ExerciseTestLabel->Location = System::Drawing::Point(30, 359);
+			this->ExerciseTestLabel->Name = L"ExerciseTestLabel";
+			this->ExerciseTestLabel->Size = System::Drawing::Size(0, 23);
+			this->ExerciseTestLabel->TabIndex = 9;
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->ExerciseTestLabel);
 			this->Controls->Add(this->DateTestLabel);
 			this->Controls->Add(this->SetsTextBox);
 			this->Controls->Add(this->label2);
@@ -242,6 +256,7 @@ namespace WorkoutTracker {
 			this->Controls->Add(this->AddWorkoutButton);
 			this->Name = L"WorkoutTracker";
 			this->Text = L"WorkoutTracker";
+			this->Load += gcnew System::EventHandler(this, &WorkoutTracker::WorkoutTracker_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -280,8 +295,18 @@ namespace WorkoutTracker {
 		}
 
 		{ // Add the Exercise
-			
-		}
+			std::string exerciseName = msclr::interop::marshal_as<std::string>(ExerciseTextBox->Text);
+			std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
+			std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
+			std::string sNumSets = msclr::interop::marshal_as<std::string>(SetsTextBox->Text);
+
+			short weight = (short)(std::stoi(sWeight));
+			short numReps = (short)(std::stoi(sNumReps));
+			short numSets = (short)(std::stoi(sNumSets));
+
+			Exercise newExercise;
+			newExercise.m_Name = exerciseName;
+			newExercise.AddWeightRepSet(weight, numReps, numSets);	}
 	}
 
 	private: System::Void DateTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -299,5 +324,7 @@ namespace WorkoutTracker {
 	private: System::Void SetsTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 		SetsTextBox->ForeColor = Color::Black;
 	}
-	};
+	private: System::Void WorkoutTracker_Load(System::Object^  sender, System::EventArgs^  e) {
+	}
+};
 }
