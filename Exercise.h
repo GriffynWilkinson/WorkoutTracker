@@ -1,9 +1,10 @@
 #pragma once
 
-ref struct WeightRepSet
+public ref struct WeightRepSet
 {
 public:
 
+	WeightRepSet();
 	WeightRepSet(const WeightRepSet^ &aCopier);
 
 	void SetWeight(short aWeight) { weight = aWeight; }
@@ -20,16 +21,12 @@ private:
 	short numSets = 1;
 };
 
-ref class Exercise
+public ref class Exercise
 {
 public:
-	Exercise();
-	Exercise(const Exercise^ &aCopier);
 	System::String^ m_Name;
 	void AddWeightRepSet(short aWeight, short aReps, short aSets);
 	void AddWeightRepSet(WeightRepSet^ aWeightRepSet);
 	void SetWeightRepSet(System::Collections::Generic::List<WeightRepSet^> aWeightRepSet);
-	System::Collections::Generic::List<WeightRepSet^> GetWeightRepSet();
-private:
 	System::Collections::Generic::List<WeightRepSet^> m_WeightRepSet;
 };

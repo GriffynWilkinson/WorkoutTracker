@@ -1,6 +1,6 @@
 #pragma once
 
-ref class Date
+public ref class Date
 {
 public:
 	bool SetDay(short aDay);

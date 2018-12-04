@@ -1,5 +1,11 @@
 #include "Exercise.h"
 
+WeightRepSet::WeightRepSet()
+{
+	weight = 0;
+	numReps = 0;
+	numSets = 0;
+}
 
 WeightRepSet::WeightRepSet(const WeightRepSet^ &aCopier)
 {
@@ -8,21 +14,10 @@ WeightRepSet::WeightRepSet(const WeightRepSet^ &aCopier)
 	numSets = aCopier->numSets;
 }
 
-Exercise::Exercise()
-{
-	m_WeightRepSet = gcnew System::Collections::Generic::List<WeightRepSet^>();
-}
-
-Exercise::Exercise(const Exercise^ &aCopier)
-{
-	m_Name = aCopier->m_Name;
-	m_WeightRepSet = aCopier->m_WeightRepSet;
-}
-
 // Adds a specific weight, number of reps and number of sets to an exercise
 void Exercise::AddWeightRepSet(short aWeight, short aReps, short aSets)
 {
-	WeightRepSet^ weightRepSet;
+	WeightRepSet^ weightRepSet = gcnew WeightRepSet();
 	weightRepSet->SetWeight(aWeight);
 	weightRepSet->SetReps(aReps);
 	weightRepSet->SetSets(aSets);
@@ -44,9 +39,4 @@ void Exercise::SetWeightRepSet(System::Collections::Generic::List<WeightRepSet^>
 	{
 		m_WeightRepSet.Add(aWeightRepSet[i]);
 	}
-}
-
-System::Collections::Generic::List<WeightRepSet^> Exercise::GetWeightRepSet()
-{
-	return m_WeightRepSet;
 }

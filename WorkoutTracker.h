@@ -26,8 +26,11 @@ namespace WorkoutTracker {
 			//TODO: Add the constructor code here
 			//
 		}
+	private: System::Windows::Forms::Label^  ExerciseShowLabel;
+	private: System::Windows::Forms::Button^  AddNewExerciseButton;
+	public:
 
-	public: Workout^ workout;
+		Workout^ workout = gcnew Workout();
 
 	protected:
 		/// <summary>
@@ -85,6 +88,8 @@ namespace WorkoutTracker {
 			this->DateTestLabel = (gcnew System::Windows::Forms::Label());
 			this->ExerciseTestLabel = (gcnew System::Windows::Forms::Label());
 			this->AddNewWeightRepSetButton = (gcnew System::Windows::Forms::Button());
+			this->ExerciseShowLabel = (gcnew System::Windows::Forms::Label());
+			this->AddNewExerciseButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -94,7 +99,7 @@ namespace WorkoutTracker {
 			this->AddWorkoutButton->Location = System::Drawing::Point(946, 633);
 			this->AddWorkoutButton->Name = L"AddWorkoutButton";
 			this->AddWorkoutButton->Size = System::Drawing::Size(183, 90);
-			this->AddWorkoutButton->TabIndex = 5;
+			this->AddWorkoutButton->TabIndex = 10;
 			this->AddWorkoutButton->Text = L"Add Workout";
 			this->AddWorkoutButton->UseVisualStyleBackColor = true;
 			this->AddWorkoutButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddWorkoutButton_Click);
@@ -259,10 +264,32 @@ namespace WorkoutTracker {
 			this->AddNewWeightRepSetButton->Location = System::Drawing::Point(280, 311);
 			this->AddNewWeightRepSetButton->Name = L"AddNewWeightRepSetButton";
 			this->AddNewWeightRepSetButton->Size = System::Drawing::Size(89, 37);
-			this->AddNewWeightRepSetButton->TabIndex = 10;
+			this->AddNewWeightRepSetButton->TabIndex = 5;
 			this->AddNewWeightRepSetButton->Text = L"Add Another Weight/Rep/Set";
 			this->AddNewWeightRepSetButton->UseVisualStyleBackColor = true;
 			this->AddNewWeightRepSetButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewWeightRepSetButton_Click);
+			// 
+			// ExerciseShowLabel
+			// 
+			this->ExerciseShowLabel->AutoSize = true;
+			this->ExerciseShowLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ExerciseShowLabel->Location = System::Drawing::Point(497, 124);
+			this->ExerciseShowLabel->Name = L"ExerciseShowLabel";
+			this->ExerciseShowLabel->Size = System::Drawing::Size(0, 19);
+			this->ExerciseShowLabel->TabIndex = 11;
+			// 
+			// AddNewExerciseButton
+			// 
+			this->AddNewExerciseButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 359);
+			this->AddNewExerciseButton->Name = L"AddNewExerciseButton";
+			this->AddNewExerciseButton->Size = System::Drawing::Size(157, 33);
+			this->AddNewExerciseButton->TabIndex = 6;
+			this->AddNewExerciseButton->Text = L"Add Another Exercise";
+			this->AddNewExerciseButton->UseVisualStyleBackColor = true;
+			this->AddNewExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewExerciseButton_Click);
 			// 
 			// WorkoutTracker
 			// 
@@ -270,6 +297,8 @@ namespace WorkoutTracker {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->AddNewExerciseButton);
+			this->Controls->Add(this->ExerciseShowLabel);
 			this->Controls->Add(this->AddNewWeightRepSetButton);
 			this->Controls->Add(this->ExerciseTestLabel);
 			this->Controls->Add(this->DateTestLabel);
@@ -315,28 +344,13 @@ namespace WorkoutTracker {
 			short month = (short)(std::stoi(seglist.at(1)));
 			short year = (short)(std::stoi(seglist.at(2)));
 
-			Date^ newDate;
+			Date^ newDate = gcnew Date();
 			newDate->SetDate(day, month, year);
 
-			workout->SetDate(newDate);
+			workout->m_Date = newDate;
 		}
 
-		{ // Add the Exercise
-			String^ exerciseName = ExerciseTextBox->Text;
-			std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
-			std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
-			std::string sNumSets = msclr::interop::marshal_as<std::string>(SetsTextBox->Text);
-
-			short weight = (short)(std::stoi(sWeight));
-			short numReps = (short)(std::stoi(sNumReps));
-			short numSets = (short)(std::stoi(sNumSets));
-
-			Exercise^ newExercise;
-			newExercise->m_Name = exerciseName;
-			newExercise->AddWeightRepSet(weight, numReps, numSets);	
-
-			workout->AddExercise(newExercise);
-		}
+		DisplayCurrentWorkout();
 	}
 
 	private: System::Void DateTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -358,6 +372,58 @@ namespace WorkoutTracker {
 	}
 	private: System::Void AddNewWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
+		AddToWorkout();
+
+		WeightTextBox->Text = "0";
+		WeightTextBox->ForeColor = Color::Gray;
+
+		RepsTextBox->Text = "0";
+		RepsTextBox->ForeColor = Color::Gray;
+
+		SetsTextBox->Text = "0";
+		SetsTextBox->ForeColor = Color::Gray;
+
+		DisplayCurrentWorkout();
+	}
+	private: System::Void AddNewExerciseButton_Click(System::Object^  sender, System::EventArgs^  e) {
+		
+		AddToWorkout();
+
+		ExerciseTextBox->Text = "Exercise Name";
+		ExerciseTextBox->ForeColor = Color::Gray;
+
+		WeightTextBox->Text = "0";
+		WeightTextBox->ForeColor = Color::Gray;
+
+		RepsTextBox->Text = "0";
+		RepsTextBox->ForeColor = Color::Gray;
+
+		SetsTextBox->Text = "0";
+		SetsTextBox->ForeColor = Color::Gray;
+
+		DisplayCurrentWorkout();
+	}
+
+	private: System::Void DisplayCurrentWorkout()
+	{
+		String^ exerciseShowText;
+
+		for (int i = 0; i < workout->m_Exercises.Count; i++)
+		{
+			exerciseShowText += workout->m_Exercises[i]->m_Name + "\r\n";
+			for (int j = 0; j < workout->m_Exercises[i]->m_WeightRepSet.Count; j++)
+			{
+				exerciseShowText += workout->m_Exercises[i]->m_WeightRepSet[j]->GetWeight() + "lbs x " +
+					workout->m_Exercises[i]->m_WeightRepSet[j]->GetReps() + " rep(s) x " +
+					workout->m_Exercises[i]->m_WeightRepSet[j]->GetSets() + " set(s)\r\n";
+			}
+		}
+
+		ExerciseShowLabel->Text = exerciseShowText;
+	}
+
+	private: System::Void AddToWorkout()
+	{
 		String^ exerciseName = ExerciseTextBox->Text;
 		std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
 		std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
@@ -367,11 +433,25 @@ namespace WorkoutTracker {
 		short numReps = (short)(std::stoi(sNumReps));
 		short numSets = (short)(std::stoi(sNumSets));
 
-		Exercise^ newExercise;
+		Exercise^ newExercise = gcnew Exercise();
 		newExercise->m_Name = exerciseName;
 		newExercise->AddWeightRepSet(weight, numReps, numSets);
 
-		workout->AddExercise(newExercise);
+		Boolean^ shouldSkip = false;
+
+		for (int i = 0; i < workout->m_Exercises.Count; i++)
+		{
+			if (workout->m_Exercises[i]->m_Name == newExercise->m_Name)
+			{
+				workout->m_Exercises[i]->AddWeightRepSet(weight, numReps, numSets);
+				shouldSkip = true;
+			}
+		}
+
+		if (shouldSkip->CompareTo(false) == 0) // Boolean::CompareTo(bool) returns 0 if the Boolean and the bool have the same value
+		{
+			workout->m_Exercises.Add(newExercise);
+		}
 	}
 	};
 }

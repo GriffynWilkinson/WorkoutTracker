@@ -1,14 +1,3 @@
-﻿  Date.cpp
-  Exercise.cpp
-d:\users\griffyn\c++\workouttracker\workouttracker\exercise.cpp(14): error C2582: 'operator =' function is unavailable in 'System::Collections::Generic::List<WeightRepSet ^>'
-d:\users\griffyn\c++\workouttracker\workouttracker\exercise.cpp(46): error C3073: 'System::Collections::Generic::List<WeightRepSet ^>': ref class does not have a user-defined copy constructor
-  Workout.cpp
-d:\users\griffyn\c++\workouttracker\workouttracker\workout.cpp(6): error C2582: 'operator =' function is unavailable in 'System::Collections::Generic::List<Exercise ^>'
-d:\users\griffyn\c++\workouttracker\workouttracker\workout.cpp(28): error C3867: 'Exercise::GetWeightRepSet': non-standard syntax; use '&' to create a pointer to member
-d:\users\griffyn\c++\workouttracker\workouttracker\workout.cpp(28): error C2109: subscript requires array or pointer type
-d:\users\griffyn\c++\workouttracker\workouttracker\workout.cpp(38): error C2582: 'operator =' function is unavailable in 'System::Collections::Generic::List<Exercise ^>'
-d:\users\griffyn\c++\workouttracker\workouttracker\workout.cpp(43): error C3073: 'System::Collections::Generic::List<Exercise ^>': ref class does not have a user-defined copy constructor
-  WorkoutTracker.cpp
-d:\users\griffyn\c++\workouttracker\workouttracker\workouttracker.h(30): warning C4677: 'workout': signature of non-private member contains assembly private type 'Workout'
-  d:\users\griffyn\c++\workouttracker\workouttracker\workout.h(6): note: see declaration of 'Workout'
-  Generating Code...
+﻿  WorkoutTracker.cpp
+  Date.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  WorkoutTracker.vcxproj -> D:\Users\Griffyn\C++\WorkoutTracker\Debug\WorkoutTracker.exe
