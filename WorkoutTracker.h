@@ -2,6 +2,8 @@
 
 #include <msclr\marshal_cppstd.h>
 #include <sstream>
+#include <iostream>
+#include <fstream>
 #include "Workout.h"
 
 namespace WorkoutTracker {
@@ -12,6 +14,7 @@ namespace WorkoutTracker {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for WorkoutTracker
@@ -28,6 +31,8 @@ namespace WorkoutTracker {
 		}
 	private: System::Windows::Forms::Label^  ExerciseShowLabel;
 	private: System::Windows::Forms::Button^  AddNewExerciseButton;
+	private: System::Windows::Forms::Label^  DateErrorLabel;
+	private: System::Windows::Forms::Label^  WeightRepSetError;
 	public:
 
 		Workout^ workout = gcnew Workout();
@@ -90,6 +95,8 @@ namespace WorkoutTracker {
 			this->AddNewWeightRepSetButton = (gcnew System::Windows::Forms::Button());
 			this->ExerciseShowLabel = (gcnew System::Windows::Forms::Label());
 			this->AddNewExerciseButton = (gcnew System::Windows::Forms::Button());
+			this->DateErrorLabel = (gcnew System::Windows::Forms::Label());
+			this->WeightRepSetError = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -291,12 +298,36 @@ namespace WorkoutTracker {
 			this->AddNewExerciseButton->UseVisualStyleBackColor = true;
 			this->AddNewExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewExerciseButton_Click);
 			// 
+			// DateErrorLabel
+			// 
+			this->DateErrorLabel->AutoSize = true;
+			this->DateErrorLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->DateErrorLabel->ForeColor = System::Drawing::Color::DarkRed;
+			this->DateErrorLabel->Location = System::Drawing::Point(166, 69);
+			this->DateErrorLabel->Name = L"DateErrorLabel";
+			this->DateErrorLabel->Size = System::Drawing::Size(0, 19);
+			this->DateErrorLabel->TabIndex = 12;
+			// 
+			// WeightRepSetError
+			// 
+			this->WeightRepSetError->AutoSize = true;
+			this->WeightRepSetError->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->WeightRepSetError->ForeColor = System::Drawing::Color::DarkRed;
+			this->WeightRepSetError->Location = System::Drawing::Point(40, 407);
+			this->WeightRepSetError->Name = L"WeightRepSetError";
+			this->WeightRepSetError->Size = System::Drawing::Size(0, 19);
+			this->WeightRepSetError->TabIndex = 13;
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->WeightRepSetError);
+			this->Controls->Add(this->DateErrorLabel);
 			this->Controls->Add(this->AddNewExerciseButton);
 			this->Controls->Add(this->ExerciseShowLabel);
 			this->Controls->Add(this->AddNewWeightRepSetButton);
@@ -326,31 +357,48 @@ namespace WorkoutTracker {
 
 	private: System::Void AddWorkoutButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
-		{ // Add the date of the workout
-			std::string date = msclr::interop::marshal_as<std::string>(DateTextBox->Text); // msclr::interop::marshal_as<> lets me convertfrom System types to std types
-			std::string segment;
-			std::vector<std::string> seglist;
+		// Add the date of the workout
+		std::string date = msclr::interop::marshal_as<std::string>(DateTextBox->Text); // msclr::interop::marshal_as<> lets me convertfrom System types to std types
 
-			std::stringstream ssDate;
-			ssDate.str(date);
+		Boolean^ isDateOkay = CheckDateFormat(date); // make sure the date entered is of the correct format so that std::stoi doesn't break the program
 
-			while (std::getline(ssDate, segment, '/')) // this reads from date and splits it up by finding '/'. it puts the individual string into segment
-			{
-				seglist.push_back(segment);
-			}
+		if (isDateOkay->CompareTo(false) == 0)
+		{
+			DateErrorLabel->Text = "Date must be in dd/mm/yyyy format";
+			return;
+		}
+		std::string segment;
+		std::vector<std::string> seglist;
 
-			// std::stoi converts a string to an int
-			short day = (short)(std::stoi(seglist.at(0)));
-			short month = (short)(std::stoi(seglist.at(1)));
-			short year = (short)(std::stoi(seglist.at(2)));
+		std::stringstream ssDate;
+		ssDate.str(date);
 
-			Date^ newDate = gcnew Date();
-			newDate->SetDate(day, month, year);
-
-			workout->m_Date = newDate;
+		while (std::getline(ssDate, segment, '/')) // this reads from date and splits it up by finding '/'. it puts the individual string into segment
+		{
+			seglist.push_back(segment);
 		}
 
-		DisplayCurrentWorkout();
+		// std::stoi converts a string to an int
+		short day = (short)(std::stoi(seglist.at(0)));
+		short month = (short)(std::stoi(seglist.at(1)));
+		short year = (short)(std::stoi(seglist.at(2)));
+
+		Date^ newDate = gcnew Date();
+		if (!newDate->SetDate(day, month, year))
+		{
+			DateErrorLabel->Text = "Please enter a valid date in the format dd/mm/yyyy";
+			return;
+		}
+
+		workout->m_Date = newDate;
+
+		AddToWorkout(); // add whatever is left in the fields to your workout
+		DisplayCurrentWorkout(); // display your  final workout
+
+		String^ fileName = day + "_" + month + "_" + year + ".txt";
+
+		SaveWorkout(fileName); // save the workout to a text file (can be found in "WorkoutTracker/WorkoutTracker")
+
 	}
 
 	private: System::Void DateTextBox_TextChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -384,9 +432,10 @@ namespace WorkoutTracker {
 		SetsTextBox->ForeColor = Color::Gray;
 
 		DisplayCurrentWorkout();
+
 	}
 	private: System::Void AddNewExerciseButton_Click(System::Object^  sender, System::EventArgs^  e) {
-		
+
 		AddToWorkout();
 
 		ExerciseTextBox->Text = "Exercise Name";
@@ -402,6 +451,8 @@ namespace WorkoutTracker {
 		SetsTextBox->ForeColor = Color::Gray;
 
 		DisplayCurrentWorkout();
+
+
 	}
 
 	private: System::Void DisplayCurrentWorkout()
@@ -424,6 +475,14 @@ namespace WorkoutTracker {
 
 	private: System::Void AddToWorkout()
 	{
+		Boolean^ isWeightRepSetOkay = CheckWeightRepSetFormat(WeightTextBox->Text, RepsTextBox->Text, SetsTextBox->Text);
+
+		if (isWeightRepSetOkay->CompareTo(false) == 0)
+		{
+			WeightRepSetError->Text = "Please only enter numbers in the weight, reps, and sets fields";
+			return;
+		}
+
 		String^ exerciseName = ExerciseTextBox->Text;
 		std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
 		std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
@@ -452,6 +511,95 @@ namespace WorkoutTracker {
 		{
 			workout->m_Exercises.Add(newExercise);
 		}
+	}
+
+	private: System::Void SaveWorkout(String^ aFileName)
+	{
+		StreamWriter^ woFile = gcnew StreamWriter(aFileName, true);
+
+		for (int i = 0; i < workout->m_Exercises.Count; i++)
+		{
+			woFile->WriteLine("");
+			woFile->WriteLine(workout->m_Exercises[i]->m_Name);
+			for (int j = 0; j < workout->m_Exercises[i]->m_WeightRepSet.Count; j++)
+			{
+				woFile->WriteLine(workout->m_Exercises[i]->m_WeightRepSet[j]->GetWeight() + "lbs x " +
+					workout->m_Exercises[i]->m_WeightRepSet[j]->GetReps() + " rep(s) x " +
+					workout->m_Exercises[i]->m_WeightRepSet[j]->GetSets() + " set(s)");
+			}
+		}
+
+		woFile->Close();
+	}
+
+	private: System::Boolean^ CheckDateFormat(std::string aDate)
+	{
+		if (aDate[0] >= '0' && aDate[0] <= '9')
+		{
+			if (aDate[1] >= '0' && aDate[1] <= '9')
+			{
+				if (aDate[2] == '/')
+				{
+					if (aDate[3] >= '0' && aDate[3] <= '9')
+					{
+						if (aDate[4] >= '0' && aDate[4] <= '9')
+						{
+							if (aDate[5] == '/')
+							{
+								if (aDate[6] >= '0' && aDate[6] <= '9')
+								{
+									if (aDate[7] >= '0' && aDate[7] <= '9')
+									{
+										if (aDate[8] >= '0' && aDate[8] <= '9')
+										{
+											if (aDate[9] >= '0' && aDate[9] <= '9')
+											{
+												if (aDate[10] == NULL)
+												{
+													return true;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private: System::Boolean^ CheckWeightRepSetFormat(String^ aWeight, String^ aReps, String^ aSets)
+	{
+		for (int i = 0; i < aWeight->Length; i++)
+		{	
+			if (aWeight[i] >= '0' && aWeight[i] <= '9');
+			else
+			{
+				return false;
+			}
+		}
+		for (int i = 0; i < aReps->Length; i++)
+		{
+			if (aReps[i] >= '0' && aReps[i] <= '9');
+			else
+			{
+				return false;
+			}
+		}
+		for (int i = 0; i < aSets->Length; i++)
+		{
+			if (aSets[i] >= '0' && aSets[i] <= '9');
+			else
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 	};
 }
