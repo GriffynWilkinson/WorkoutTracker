@@ -27,6 +27,9 @@
     <ClCompile Include="Workout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LoadWorkoutForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WorkoutTracker.h">
@@ -41,5 +44,13 @@
     <ClInclude Include="Exercise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LoadWorkoutForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WorkoutTracker.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

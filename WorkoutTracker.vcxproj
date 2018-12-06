@@ -135,18 +135,25 @@
   <ItemGroup>
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Exercise.cpp" />
+    <ClCompile Include="LoadWorkoutForm.cpp" />
     <ClCompile Include="Workout.cpp" />
     <ClCompile Include="WorkoutTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Date.h" />
     <ClInclude Include="Exercise.h" />
+    <ClInclude Include="LoadWorkoutForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Workout.h" />
     <ClInclude Include="WorkoutTracker.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LoadWorkoutForm.resx">
+      <DependentUpon>LoadWorkoutForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorkoutTracker.resx">
       <DependentUpon>WorkoutTracker.h</DependentUpon>
     </EmbeddedResource>

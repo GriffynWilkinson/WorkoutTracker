@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include "Workout.h"
+#include "LoadWorkoutForm.h"
 
 namespace WorkoutTracker {
 
@@ -33,6 +34,7 @@ namespace WorkoutTracker {
 	private: System::Windows::Forms::Button^  AddNewExerciseButton;
 	private: System::Windows::Forms::Label^  DateErrorLabel;
 	private: System::Windows::Forms::Label^  WeightRepSetError;
+	private: System::Windows::Forms::Button^  LoadWorkoutButton;
 	public:
 
 		Workout^ workout = gcnew Workout();
@@ -97,6 +99,7 @@ namespace WorkoutTracker {
 			this->AddNewExerciseButton = (gcnew System::Windows::Forms::Button());
 			this->DateErrorLabel = (gcnew System::Windows::Forms::Label());
 			this->WeightRepSetError = (gcnew System::Windows::Forms::Label());
+			this->LoadWorkoutButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -320,12 +323,25 @@ namespace WorkoutTracker {
 			this->WeightRepSetError->Size = System::Drawing::Size(0, 19);
 			this->WeightRepSetError->TabIndex = 13;
 			// 
+			// LoadWorkoutButton
+			// 
+			this->LoadWorkoutButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->LoadWorkoutButton->Location = System::Drawing::Point(736, 633);
+			this->LoadWorkoutButton->Name = L"LoadWorkoutButton";
+			this->LoadWorkoutButton->Size = System::Drawing::Size(183, 90);
+			this->LoadWorkoutButton->TabIndex = 14;
+			this->LoadWorkoutButton->Text = L"Load Workout";
+			this->LoadWorkoutButton->UseVisualStyleBackColor = true;
+			this->LoadWorkoutButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::LoadWorkoutButton_Click);
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->LoadWorkoutButton);
 			this->Controls->Add(this->WeightRepSetError);
 			this->Controls->Add(this->DateErrorLabel);
 			this->Controls->Add(this->AddNewExerciseButton);
@@ -455,7 +471,7 @@ namespace WorkoutTracker {
 
 	}
 
-	private: System::Void DisplayCurrentWorkout()
+	public: System::Void DisplayCurrentWorkout()
 	{
 		String^ exerciseShowText;
 
@@ -515,7 +531,7 @@ namespace WorkoutTracker {
 
 	private: System::Void SaveWorkout(String^ aFileName)
 	{
-		StreamWriter^ woFile = gcnew StreamWriter(aFileName, true);
+		StreamWriter^ woFile = gcnew StreamWriter(aFileName);
 
 		for (int i = 0; i < workout->m_Exercises.Count; i++)
 		{
@@ -532,7 +548,7 @@ namespace WorkoutTracker {
 		woFile->Close();
 	}
 
-	private: System::Boolean^ CheckDateFormat(std::string aDate)
+	public: static System::Boolean^ CheckDateFormat(std::string aDate)
 	{
 		if (aDate[0] >= '0' && aDate[0] <= '9')
 		{
@@ -572,10 +588,17 @@ namespace WorkoutTracker {
 		return false;
 	}
 
+	public: static System::Boolean^ CheckDateFormat(String^ aDate)
+	{
+		std::string date = msclr::interop::marshal_as<std::string>(aDate);
+
+		return CheckDateFormat(date);
+	}
+
 	private: System::Boolean^ CheckWeightRepSetFormat(String^ aWeight, String^ aReps, String^ aSets)
 	{
 		for (int i = 0; i < aWeight->Length; i++)
-		{	
+		{
 			if (aWeight[i] >= '0' && aWeight[i] <= '9');
 			else
 			{
@@ -601,5 +624,14 @@ namespace WorkoutTracker {
 
 		return true;
 	}
+	private: System::Void LoadWorkoutButton_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		LoadWorkoutForm^ loadWorkoutForm = gcnew LoadWorkoutForm(workout);
+		loadWorkoutForm->ShowDialog();
+
+		DisplayCurrentWorkout();
+
+	}
+
 	};
 }
