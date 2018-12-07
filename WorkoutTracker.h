@@ -38,6 +38,7 @@ namespace WorkoutTracker {
 	public:
 
 		Workout^ workout = gcnew Workout();
+		WorkoutObject^ woObject;
 
 	protected:
 		/// <summary>
@@ -626,8 +627,12 @@ namespace WorkoutTracker {
 	}
 	private: System::Void LoadWorkoutButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
+		//Workout^% trWorkout = workout;
+
 		LoadWorkoutForm^ loadWorkoutForm = gcnew LoadWorkoutForm(workout);
 		loadWorkoutForm->ShowDialog();
+
+		workout = woObject->GetWorkout();
 
 		DisplayCurrentWorkout();
 

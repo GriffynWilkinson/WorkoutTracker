@@ -1,4 +1,8 @@
-﻿  WorkoutTracker.cpp
+﻿  Date.cpp
+  Exercise.cpp
+  LoadWorkoutForm.cpp
+  Workout.cpp
+  WorkoutTracker.cpp
 d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(198): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
           with
           [
@@ -14,6 +18,8 @@ d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(223): warni
           [
               _Elem=char
           ]
-d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(252): warning C4101: 'e': unreferenced local variable
+d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(254): warning C4101: 'e': unreferenced local variable
+  Generating Code...
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
   Date.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   WorkoutTracker.vcxproj -> D:\Users\Griffyn\C++\WorkoutTracker\Debug\WorkoutTracker.exe

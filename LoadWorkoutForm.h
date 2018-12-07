@@ -1,7 +1,5 @@
 #pragma once
 
-#include "WorkoutTracker.h"
-
 namespace WorkoutTracker {
 
 	using namespace System;
@@ -24,14 +22,16 @@ namespace WorkoutTracker {
 			InitializeComponent();
 
 		}
-		LoadWorkoutForm(Workout^ aWorkout)
+		LoadWorkoutForm(Workout^% aWorkout)
 		{
 			InitializeComponent();
 
+			workout = gcnew Workout();
 			workout = aWorkout;
 		}
 
 	public: Workout^ workout;
+			WorkoutObject^ woObject;
 
 	protected:
 		/// <summary>
@@ -245,6 +245,8 @@ namespace WorkoutTracker {
 			} while (!woFile->EndOfStream);
 	
 			workout = loadedWorkout;
+
+			woObject->SetWorkout(workout);
 
 			this->Close();
 
