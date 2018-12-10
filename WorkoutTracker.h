@@ -30,7 +30,9 @@ namespace WorkoutTracker {
 			//TODO: Add the constructor code here
 			//
 		}
-	private: System::Windows::Forms::Label^  ExerciseShowLabel;
+
+	public:
+
 	private: System::Windows::Forms::Button^  AddNewExerciseButton;
 	private: System::Windows::Forms::Label^  DateErrorLabel;
 	private: System::Windows::Forms::Label^  WeightRepSetError;
@@ -41,6 +43,8 @@ namespace WorkoutTracker {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  RemoveWeightRepSetButton;
 	private: System::Windows::Forms::Button^  RemoveExerciseButton;
+	private: System::Windows::Forms::TextBox^  ExerciseShowLabel;
+
 	public:
 		WorkoutObject^ woObject;
 
@@ -100,7 +104,6 @@ namespace WorkoutTracker {
 			this->DateTestLabel = (gcnew System::Windows::Forms::Label());
 			this->ExerciseTestLabel = (gcnew System::Windows::Forms::Label());
 			this->AddNewWeightRepSetButton = (gcnew System::Windows::Forms::Button());
-			this->ExerciseShowLabel = (gcnew System::Windows::Forms::Label());
 			this->AddNewExerciseButton = (gcnew System::Windows::Forms::Button());
 			this->DateErrorLabel = (gcnew System::Windows::Forms::Label());
 			this->WeightRepSetError = (gcnew System::Windows::Forms::Label());
@@ -108,17 +111,18 @@ namespace WorkoutTracker {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->RemoveWeightRepSetButton = (gcnew System::Windows::Forms::Button());
 			this->RemoveExerciseButton = (gcnew System::Windows::Forms::Button());
+			this->ExerciseShowLabel = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
 			// 
 			this->AddWorkoutButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->AddWorkoutButton->Location = System::Drawing::Point(946, 633);
+			this->AddWorkoutButton->Location = System::Drawing::Point(193, 656);
 			this->AddWorkoutButton->Name = L"AddWorkoutButton";
-			this->AddWorkoutButton->Size = System::Drawing::Size(183, 90);
+			this->AddWorkoutButton->Size = System::Drawing::Size(185, 67);
 			this->AddWorkoutButton->TabIndex = 10;
-			this->AddWorkoutButton->Text = L"Add Workout";
+			this->AddWorkoutButton->Text = L"Save Workout";
 			this->AddWorkoutButton->UseVisualStyleBackColor = true;
 			this->AddWorkoutButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddWorkoutButton_Click);
 			// 
@@ -287,16 +291,6 @@ namespace WorkoutTracker {
 			this->AddNewWeightRepSetButton->UseVisualStyleBackColor = true;
 			this->AddNewWeightRepSetButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewWeightRepSetButton_Click);
 			// 
-			// ExerciseShowLabel
-			// 
-			this->ExerciseShowLabel->AutoSize = true;
-			this->ExerciseShowLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->ExerciseShowLabel->Location = System::Drawing::Point(497, 124);
-			this->ExerciseShowLabel->Name = L"ExerciseShowLabel";
-			this->ExerciseShowLabel->Size = System::Drawing::Size(0, 19);
-			this->ExerciseShowLabel->TabIndex = 11;
-			// 
 			// AddNewExerciseButton
 			// 
 			this->AddNewExerciseButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
@@ -315,7 +309,7 @@ namespace WorkoutTracker {
 			this->DateErrorLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->DateErrorLabel->ForeColor = System::Drawing::Color::DarkRed;
-			this->DateErrorLabel->Location = System::Drawing::Point(166, 69);
+			this->DateErrorLabel->Location = System::Drawing::Point(49, 69);
 			this->DateErrorLabel->Name = L"DateErrorLabel";
 			this->DateErrorLabel->Size = System::Drawing::Size(0, 19);
 			this->DateErrorLabel->TabIndex = 12;
@@ -335,9 +329,9 @@ namespace WorkoutTracker {
 			// 
 			this->LoadWorkoutButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->LoadWorkoutButton->Location = System::Drawing::Point(736, 633);
+			this->LoadWorkoutButton->Location = System::Drawing::Point(2, 656);
 			this->LoadWorkoutButton->Name = L"LoadWorkoutButton";
-			this->LoadWorkoutButton->Size = System::Drawing::Size(183, 90);
+			this->LoadWorkoutButton->Size = System::Drawing::Size(185, 67);
 			this->LoadWorkoutButton->TabIndex = 14;
 			this->LoadWorkoutButton->Text = L"Load Workout";
 			this->LoadWorkoutButton->UseVisualStyleBackColor = true;
@@ -379,12 +373,28 @@ namespace WorkoutTracker {
 			this->RemoveExerciseButton->UseVisualStyleBackColor = true;
 			this->RemoveExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::RemoveExerciseButton_Click);
 			// 
+			// ExerciseShowLabel
+			// 
+			this->ExerciseShowLabel->BackColor = System::Drawing::Color::Gray;
+			this->ExerciseShowLabel->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->ExerciseShowLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ExerciseShowLabel->Location = System::Drawing::Point(423, 69);
+			this->ExerciseShowLabel->Multiline = true;
+			this->ExerciseShowLabel->Name = L"ExerciseShowLabel";
+			this->ExerciseShowLabel->ReadOnly = true;
+			this->ExerciseShowLabel->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->ExerciseShowLabel->Size = System::Drawing::Size(272, 668);
+			this->ExerciseShowLabel->TabIndex = 18;
+			this->ExerciseShowLabel->WordWrap = false;
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
-			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->ClientSize = System::Drawing::Size(726, 761);
+			this->Controls->Add(this->ExerciseShowLabel);
 			this->Controls->Add(this->RemoveExerciseButton);
 			this->Controls->Add(this->RemoveWeightRepSetButton);
 			this->Controls->Add(this->button1);
@@ -392,7 +402,6 @@ namespace WorkoutTracker {
 			this->Controls->Add(this->WeightRepSetError);
 			this->Controls->Add(this->DateErrorLabel);
 			this->Controls->Add(this->AddNewExerciseButton);
-			this->Controls->Add(this->ExerciseShowLabel);
 			this->Controls->Add(this->AddNewWeightRepSetButton);
 			this->Controls->Add(this->ExerciseTestLabel);
 			this->Controls->Add(this->DateTestLabel);
@@ -430,6 +439,10 @@ namespace WorkoutTracker {
 			DateErrorLabel->Text = "Date must be in dd/mm/yyyy format";
 			return;
 		}
+		else
+		{
+			DateErrorLabel->Text = "";
+		}
 		std::string segment;
 		std::vector<std::string> seglist;
 
@@ -451,6 +464,10 @@ namespace WorkoutTracker {
 		{
 			DateErrorLabel->Text = "Please enter a valid date in the format dd/mm/yyyy";
 			return;
+		}
+		else
+		{
+			DateErrorLabel->Text = "";
 		}
 
 		workout->m_Date = newDate;
@@ -553,6 +570,8 @@ namespace WorkoutTracker {
 		}
 
 		ExerciseShowLabel->Text = exerciseShowText;
+		ExerciseShowLabel->SelectionStart = ExerciseShowLabel->Text->Length;
+		ExerciseShowLabel->ScrollToCaret();
 	}
 
 	private: System::Void AddToWorkout()
@@ -563,6 +582,10 @@ namespace WorkoutTracker {
 		{
 			WeightRepSetError->Text = "Please only enter numbers in the weight, reps, and sets fields";
 			return;
+		}
+		else
+		{
+			WeightRepSetError->Text = "";
 		}
 
 		String^ exerciseName = ExerciseTextBox->Text;
@@ -703,6 +726,19 @@ namespace WorkoutTracker {
 
 		String^ date = workout->m_Date->GetDay() + "/" + workout->m_Date->GetMonth() + "/" + workout->m_Date->GetYear();
 
+		if (workout->m_Date->GetDay() < 10)
+		{
+			date = "0" + workout->m_Date->GetDay() + "/" + workout->m_Date->GetMonth() + "/" + workout->m_Date->GetYear();
+		}
+		if (workout->m_Date->GetDay() < 10 && workout->m_Date->GetMonth() < 10)
+		{
+			date = "0" + workout->m_Date->GetDay() + "/0" + workout->m_Date->GetMonth() + "/" + workout->m_Date->GetYear();
+		}
+		if (workout->m_Date->GetMonth() < 10)
+		{
+			date = workout->m_Date->GetDay() + "/0" + workout->m_Date->GetMonth() + "/" + workout->m_Date->GetYear();
+		}
+
 		DateTextBox->Text = date;
 
 	}
@@ -744,6 +780,7 @@ namespace WorkoutTracker {
 								workout->m_Exercises[i]->m_WeightRepSet.RemoveAt(j);
 								DisplayCurrentWorkout();
 								removedWeightRepSet = true;
+								WeightRepSetError->Text = "";
 							}
 						}
 					}
@@ -771,6 +808,7 @@ namespace WorkoutTracker {
 				workout->m_Exercises.RemoveAt(i);
 				DisplayCurrentWorkout();
 				removedExercise = true;
+				WeightRepSetError->Text = "";
 			}
 		}
 

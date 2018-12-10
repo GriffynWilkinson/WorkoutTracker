@@ -1,6 +1,52 @@
 
-Exercise Name
-0lbs x 0 rep(s) x 0 set(s)
+Dumbbell Bent Over Row
+10lbs x 30 rep(s) x 1 set(s)
+25lbs x 10 rep(s) x 1 set(s)
+35lbs x 8 rep(s) x 1 set(s)
+50lbs x 5 rep(s) x 1 set(s)
+55lbs x 3 rep(s) x 1 set(s)
 
-name
-0lbs x 0 rep(s) x 0 set(s)
+Bench Press
+10lbs x 30 rep(s) x 1 set(s)
+30lbs x 10 rep(s) x 1 set(s)
+40lbs x 8 rep(s) x 1 set(s)
+50lbs x 5 rep(s) x 1 set(s)
+65lbs x 3 rep(s) x 1 set(s)
+
+Inclined Bench Press
+10lbs x 30 rep(s) x 1 set(s)
+30lbs x 10 rep(s) x 1 set(s)
+40lbs x 8 rep(s) x 1 set(s)
+50lbs x 5 rep(s) x 1 set(s)
+55lbs x 1 rep(s) x 1 set(s)
+
+Low Row
+66lbs x 30 rep(s) x 1 set(s)
+121lbs x 10 rep(s) x 1 set(s)
+143lbs x 8 rep(s) x 1 set(s)
+165lbs x 5 rep(s) x 1 set(s)
+187lbs x 3 rep(s) x 1 set(s)
+
+Lat Pull Down
+55lbs x 30 rep(s) x 1 set(s)
+110lbs x 10 rep(s) x 1 set(s)
+143lbs x 8 rep(s) x 1 set(s)
+165lbs x 5 rep(s) x 1 set(s)
+187lbs x 3 rep(s) x 1 set(s)
+
+Inclined Dumbbell Press
+15lbs x 30 rep(s) x 1 set(s)
+35lbs x 10 rep(s) x 1 set(s)
+45lbs x 8 rep(s) x 1 set(s)
+55lbs x 5 rep(s) x 1 set(s)
+
+Dumbbell Fly
+30lbs x 10 rep(s) x 4 set(s)
+
+Dumbbell Pull Over
+45lbs x 10 rep(s) x 4 set(s)
+
+Assisted Wide Grip Pull Up
+60lbs x 20 rep(s) x 3 set(s)
+40lbs x 20 rep(s) x 1 set(s)
+20lbs x 10 rep(s) x 2 set(s)
