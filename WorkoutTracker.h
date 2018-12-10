@@ -39,6 +39,8 @@ namespace WorkoutTracker {
 
 		Workout^ workout = gcnew Workout();
 	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  RemoveWeightRepSetButton;
+	private: System::Windows::Forms::Button^  RemoveExerciseButton;
 	public:
 		WorkoutObject^ woObject;
 
@@ -104,6 +106,8 @@ namespace WorkoutTracker {
 			this->WeightRepSetError = (gcnew System::Windows::Forms::Label());
 			this->LoadWorkoutButton = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->RemoveWeightRepSetButton = (gcnew System::Windows::Forms::Button());
+			this->RemoveExerciseButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -172,7 +176,7 @@ namespace WorkoutTracker {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(60, 179);
+			this->label1->Location = System::Drawing::Point(60, 222);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(61, 21);
 			this->label1->TabIndex = 3;
@@ -185,7 +189,7 @@ namespace WorkoutTracker {
 			this->WeightTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->WeightTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
-			this->WeightTextBox->Location = System::Drawing::Point(309, 174);
+			this->WeightTextBox->Location = System::Drawing::Point(309, 217);
 			this->WeightTextBox->Name = L"WeightTextBox";
 			this->WeightTextBox->Size = System::Drawing::Size(60, 29);
 			this->WeightTextBox->TabIndex = 2;
@@ -200,7 +204,7 @@ namespace WorkoutTracker {
 			this->RepsTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->RepsTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
-			this->RepsTextBox->Location = System::Drawing::Point(309, 219);
+			this->RepsTextBox->Location = System::Drawing::Point(309, 262);
 			this->RepsTextBox->Name = L"RepsTextBox";
 			this->RepsTextBox->Size = System::Drawing::Size(60, 29);
 			this->RepsTextBox->TabIndex = 3;
@@ -215,7 +219,7 @@ namespace WorkoutTracker {
 			this->RepsLabel->AutoSize = true;
 			this->RepsLabel->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->RepsLabel->Location = System::Drawing::Point(72, 222);
+			this->RepsLabel->Location = System::Drawing::Point(72, 265);
 			this->RepsLabel->Name = L"RepsLabel";
 			this->RepsLabel->Size = System::Drawing::Size(49, 21);
 			this->RepsLabel->TabIndex = 5;
@@ -228,7 +232,7 @@ namespace WorkoutTracker {
 			this->SetsTextBox->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->SetsTextBox->ForeColor = System::Drawing::SystemColors::GrayText;
-			this->SetsTextBox->Location = System::Drawing::Point(309, 267);
+			this->SetsTextBox->Location = System::Drawing::Point(309, 310);
 			this->SetsTextBox->Name = L"SetsTextBox";
 			this->SetsTextBox->Size = System::Drawing::Size(60, 29);
 			this->SetsTextBox->TabIndex = 4;
@@ -243,7 +247,7 @@ namespace WorkoutTracker {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Times New Roman", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(79, 267);
+			this->label2->Location = System::Drawing::Point(79, 310);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(42, 21);
 			this->label2->TabIndex = 7;
@@ -275,7 +279,7 @@ namespace WorkoutTracker {
 			// 
 			this->AddNewWeightRepSetButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 8.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->AddNewWeightRepSetButton->Location = System::Drawing::Point(280, 311);
+			this->AddNewWeightRepSetButton->Location = System::Drawing::Point(280, 354);
 			this->AddNewWeightRepSetButton->Name = L"AddNewWeightRepSetButton";
 			this->AddNewWeightRepSetButton->Size = System::Drawing::Size(89, 37);
 			this->AddNewWeightRepSetButton->TabIndex = 5;
@@ -297,7 +301,7 @@ namespace WorkoutTracker {
 			// 
 			this->AddNewExerciseButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 393);
+			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 438);
 			this->AddNewExerciseButton->Name = L"AddNewExerciseButton";
 			this->AddNewExerciseButton->Size = System::Drawing::Size(157, 33);
 			this->AddNewExerciseButton->TabIndex = 6;
@@ -322,7 +326,7 @@ namespace WorkoutTracker {
 			this->WeightRepSetError->Font = (gcnew System::Drawing::Font(L"Times New Roman", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->WeightRepSetError->ForeColor = System::Drawing::Color::DarkRed;
-			this->WeightRepSetError->Location = System::Drawing::Point(40, 407);
+			this->WeightRepSetError->Location = System::Drawing::Point(30, 166);
 			this->WeightRepSetError->Name = L"WeightRepSetError";
 			this->WeightRepSetError->Size = System::Drawing::Size(0, 19);
 			this->WeightRepSetError->TabIndex = 13;
@@ -343,7 +347,7 @@ namespace WorkoutTracker {
 			// 
 			this->button1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button1->Location = System::Drawing::Point(248, 354);
+			this->button1->Location = System::Drawing::Point(248, 399);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(121, 33);
 			this->button1->TabIndex = 15;
@@ -351,12 +355,38 @@ namespace WorkoutTracker {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &WorkoutTracker::button1_Click);
 			// 
+			// RemoveWeightRepSetButton
+			// 
+			this->RemoveWeightRepSetButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->RemoveWeightRepSetButton->Location = System::Drawing::Point(248, 477);
+			this->RemoveWeightRepSetButton->Name = L"RemoveWeightRepSetButton";
+			this->RemoveWeightRepSetButton->Size = System::Drawing::Size(121, 44);
+			this->RemoveWeightRepSetButton->TabIndex = 16;
+			this->RemoveWeightRepSetButton->Text = L"Remove Weight/Rep/Set";
+			this->RemoveWeightRepSetButton->UseVisualStyleBackColor = true;
+			this->RemoveWeightRepSetButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::RemoveWeightRepSetButton_Click);
+			// 
+			// RemoveExerciseButton
+			// 
+			this->RemoveExerciseButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->RemoveExerciseButton->Location = System::Drawing::Point(248, 527);
+			this->RemoveExerciseButton->Name = L"RemoveExerciseButton";
+			this->RemoveExerciseButton->Size = System::Drawing::Size(121, 36);
+			this->RemoveExerciseButton->TabIndex = 17;
+			this->RemoveExerciseButton->Text = L"Remove Exercise";
+			this->RemoveExerciseButton->UseVisualStyleBackColor = true;
+			this->RemoveExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::RemoveExerciseButton_Click);
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->RemoveExerciseButton);
+			this->Controls->Add(this->RemoveWeightRepSetButton);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->LoadWorkoutButton);
 			this->Controls->Add(this->WeightRepSetError);
@@ -450,7 +480,7 @@ namespace WorkoutTracker {
 	}
 	private: System::Void WorkoutTracker_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
-	// these next three functions all do the same thing, however having the three different buittons to do this looks better and feels better
+			 // these next three functions all do the same thing, however having the three different buittons to do this looks better and feels better
 	private: System::Void AddNewWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		AddToWorkout();
@@ -467,7 +497,7 @@ namespace WorkoutTracker {
 		DisplayCurrentWorkout();
 
 	}
-    // this is the add to workout button 
+			 // this is the add to workout button 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		AddToWorkout();
@@ -677,5 +707,78 @@ namespace WorkoutTracker {
 
 	}
 
-};
+	private: System::Void RemoveWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		Boolean^ removedWeightRepSet = false;
+
+		String^ exerciseLookingFor = ExerciseTextBox->Text;
+		
+		Boolean^ isWeightRepSetOkay = CheckWeightRepSetFormat(WeightTextBox->Text, RepsTextBox->Text, SetsTextBox->Text);
+
+		if (isWeightRepSetOkay->CompareTo(false) == 0)
+		{
+			WeightRepSetError->Text = "Please only enter numbers in the weight, reps, and sets fields";
+			return;
+		}
+
+		std::string sWeight = msclr::interop::marshal_as<std::string>(WeightTextBox->Text);
+		std::string sNumReps = msclr::interop::marshal_as<std::string>(RepsTextBox->Text);
+		std::string sNumSets = msclr::interop::marshal_as<std::string>(SetsTextBox->Text);
+
+		short weightLookingFor = (short)(std::stoi(sWeight));
+		short numRepsLookingFor = (short)(std::stoi(sNumReps));
+		short numSetsLookingFor = (short)(std::stoi(sNumSets));
+
+		for (int i = 0; i < workout->m_Exercises.Count; i++)
+		{
+			if (workout->m_Exercises[i]->m_Name == exerciseLookingFor)
+			{
+				for (int j = 0; j < workout->m_Exercises[i]->m_WeightRepSet.Count; j++)
+				{
+					if (workout->m_Exercises[i]->m_WeightRepSet[j]->GetWeight() == weightLookingFor)
+					{
+						if (workout->m_Exercises[i]->m_WeightRepSet[j]->GetReps() == numRepsLookingFor)
+						{
+							if (workout->m_Exercises[i]->m_WeightRepSet[j]->GetSets() == numSetsLookingFor)
+							{
+								workout->m_Exercises[i]->m_WeightRepSet.RemoveAt(j);
+								DisplayCurrentWorkout();
+								removedWeightRepSet = true;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if (removedWeightRepSet->CompareTo(false) == 0)
+		{
+			WeightRepSetError->Text = "Could not find the given weight/rep/set to remove.\r\n" +
+				"Please check your values and try again.";
+		}
+
+	}
+	private: System::Void RemoveExerciseButton_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		Boolean^ removedExercise = false;
+
+		String^ exerciseToRemove = ExerciseTextBox->Text;
+
+		for (int i = 0; i < workout->m_Exercises.Count; i++)
+		{
+			if (workout->m_Exercises[i]->m_Name == exerciseToRemove)
+			{
+				workout->m_Exercises.RemoveAt(i);
+				DisplayCurrentWorkout();
+				removedExercise = true;
+			}
+		}
+
+		if (removedExercise->CompareTo(false) == 0)
+		{
+			WeightRepSetError->Text = "Could not find the given exercise to remove.\r\n" +
+				"Please check the name and try again.";
+		}
+	}
+	};
 }
