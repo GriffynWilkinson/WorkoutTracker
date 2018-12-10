@@ -38,6 +38,8 @@ namespace WorkoutTracker {
 	public:
 
 		Workout^ workout = gcnew Workout();
+	private: System::Windows::Forms::Button^  button1;
+	public:
 		WorkoutObject^ woObject;
 
 	protected:
@@ -101,6 +103,7 @@ namespace WorkoutTracker {
 			this->DateErrorLabel = (gcnew System::Windows::Forms::Label());
 			this->WeightRepSetError = (gcnew System::Windows::Forms::Label());
 			this->LoadWorkoutButton = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// AddWorkoutButton
@@ -294,7 +297,7 @@ namespace WorkoutTracker {
 			// 
 			this->AddNewExerciseButton->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 359);
+			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 393);
 			this->AddNewExerciseButton->Name = L"AddNewExerciseButton";
 			this->AddNewExerciseButton->Size = System::Drawing::Size(157, 33);
 			this->AddNewExerciseButton->TabIndex = 6;
@@ -336,12 +339,25 @@ namespace WorkoutTracker {
 			this->LoadWorkoutButton->UseVisualStyleBackColor = true;
 			this->LoadWorkoutButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::LoadWorkoutButton_Click);
 			// 
+			// button1
+			// 
+			this->button1->Font = (gcnew System::Drawing::Font(L"Times New Roman", 11.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(248, 354);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(121, 33);
+			this->button1->TabIndex = 15;
+			this->button1->Text = L"Add To Workout";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &WorkoutTracker::button1_Click);
+			// 
 			// WorkoutTracker
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gray;
 			this->ClientSize = System::Drawing::Size(1174, 761);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->LoadWorkoutButton);
 			this->Controls->Add(this->WeightRepSetError);
 			this->Controls->Add(this->DateErrorLabel);
@@ -409,7 +425,6 @@ namespace WorkoutTracker {
 
 		workout->m_Date = newDate;
 
-		AddToWorkout(); // add whatever is left in the fields to your workout
 		DisplayCurrentWorkout(); // display your  final workout
 
 		String^ fileName = day + "_" + month + "_" + year + ".txt";
@@ -435,9 +450,30 @@ namespace WorkoutTracker {
 	}
 	private: System::Void WorkoutTracker_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
+	// these next three functions all do the same thing, however having the three different buittons to do this looks better and feels better
 	private: System::Void AddNewWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		AddToWorkout();
+
+		WeightTextBox->Text = "0";
+		WeightTextBox->ForeColor = Color::Gray;
+
+		RepsTextBox->Text = "0";
+		RepsTextBox->ForeColor = Color::Gray;
+
+		SetsTextBox->Text = "0";
+		SetsTextBox->ForeColor = Color::Gray;
+
+		DisplayCurrentWorkout();
+
+	}
+    // this is the add to workout button 
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		AddToWorkout();
+
+		ExerciseTextBox->Text = "Exercise Name";
+		ExerciseTextBox->ForeColor = Color::Gray;
 
 		WeightTextBox->Text = "0";
 		WeightTextBox->ForeColor = Color::Gray;
@@ -468,7 +504,6 @@ namespace WorkoutTracker {
 		SetsTextBox->ForeColor = Color::Gray;
 
 		DisplayCurrentWorkout();
-
 
 	}
 
@@ -636,7 +671,11 @@ namespace WorkoutTracker {
 
 		DisplayCurrentWorkout();
 
+		String^ date = workout->m_Date->GetDay() + "/" + workout->m_Date->GetMonth() + "/" + workout->m_Date->GetYear();
+
+		DateTextBox->Text = date;
+
 	}
 
-	};
+};
 }

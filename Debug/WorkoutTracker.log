@@ -1,25 +1,19 @@
-﻿  Date.cpp
-  Exercise.cpp
-  LoadWorkoutForm.cpp
-  Workout.cpp
-  WorkoutTracker.cpp
-d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(198): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
+﻿  WorkoutTracker.cpp
+d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(200): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
           with
           [
               _Elem=char
           ]
-d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(211): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
+d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(213): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
           with
           [
               _Elem=char
           ]
-d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(223): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
+d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(225): warning C4244: 'argument': conversion from 'wchar_t' to '_Elem', possible loss of data
           with
           [
               _Elem=char
           ]
-d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(254): warning C4101: 'e': unreferenced local variable
-  Generating Code...
-  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+d:\users\griffyn\c++\workouttracker\workouttracker\loadworkoutform.h(256): warning C4101: 'e': unreferenced local variable
   Date.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   WorkoutTracker.vcxproj -> D:\Users\Griffyn\C++\WorkoutTracker\Debug\WorkoutTracker.exe

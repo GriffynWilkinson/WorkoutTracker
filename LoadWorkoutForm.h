@@ -168,6 +168,8 @@ namespace WorkoutTracker {
 
 			Workout^ loadedWorkout = gcnew Workout;
 
+			loadedWorkout->m_Date->SetDate(day, month, year);
+
 			String^ line = woFile->ReadLine();
 
 			do
