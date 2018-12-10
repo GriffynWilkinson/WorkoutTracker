@@ -298,7 +298,7 @@ namespace WorkoutTracker {
 			this->AddNewExerciseButton->Location = System::Drawing::Point(212, 438);
 			this->AddNewExerciseButton->Name = L"AddNewExerciseButton";
 			this->AddNewExerciseButton->Size = System::Drawing::Size(157, 33);
-			this->AddNewExerciseButton->TabIndex = 6;
+			this->AddNewExerciseButton->TabIndex = 7;
 			this->AddNewExerciseButton->Text = L"Add Another Exercise";
 			this->AddNewExerciseButton->UseVisualStyleBackColor = true;
 			this->AddNewExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::AddNewExerciseButton_Click);
@@ -332,7 +332,7 @@ namespace WorkoutTracker {
 			this->LoadWorkoutButton->Location = System::Drawing::Point(2, 656);
 			this->LoadWorkoutButton->Name = L"LoadWorkoutButton";
 			this->LoadWorkoutButton->Size = System::Drawing::Size(185, 67);
-			this->LoadWorkoutButton->TabIndex = 14;
+			this->LoadWorkoutButton->TabIndex = 11;
 			this->LoadWorkoutButton->Text = L"Load Workout";
 			this->LoadWorkoutButton->UseVisualStyleBackColor = true;
 			this->LoadWorkoutButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::LoadWorkoutButton_Click);
@@ -344,7 +344,7 @@ namespace WorkoutTracker {
 			this->button1->Location = System::Drawing::Point(248, 399);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(121, 33);
-			this->button1->TabIndex = 15;
+			this->button1->TabIndex = 6;
 			this->button1->Text = L"Add To Workout";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &WorkoutTracker::button1_Click);
@@ -356,7 +356,7 @@ namespace WorkoutTracker {
 			this->RemoveWeightRepSetButton->Location = System::Drawing::Point(248, 477);
 			this->RemoveWeightRepSetButton->Name = L"RemoveWeightRepSetButton";
 			this->RemoveWeightRepSetButton->Size = System::Drawing::Size(121, 44);
-			this->RemoveWeightRepSetButton->TabIndex = 16;
+			this->RemoveWeightRepSetButton->TabIndex = 8;
 			this->RemoveWeightRepSetButton->Text = L"Remove Weight/Rep/Set";
 			this->RemoveWeightRepSetButton->UseVisualStyleBackColor = true;
 			this->RemoveWeightRepSetButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::RemoveWeightRepSetButton_Click);
@@ -368,7 +368,7 @@ namespace WorkoutTracker {
 			this->RemoveExerciseButton->Location = System::Drawing::Point(248, 527);
 			this->RemoveExerciseButton->Name = L"RemoveExerciseButton";
 			this->RemoveExerciseButton->Size = System::Drawing::Size(121, 36);
-			this->RemoveExerciseButton->TabIndex = 17;
+			this->RemoveExerciseButton->TabIndex = 9;
 			this->RemoveExerciseButton->Text = L"Remove Exercise";
 			this->RemoveExerciseButton->UseVisualStyleBackColor = true;
 			this->RemoveExerciseButton->Click += gcnew System::EventHandler(this, &WorkoutTracker::RemoveExerciseButton_Click);
@@ -497,7 +497,7 @@ namespace WorkoutTracker {
 	}
 	private: System::Void WorkoutTracker_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
-			 // these next three functions all do the same thing, however having the three different buittons to do this looks better and feels better
+			 // these next three functions all do the same thing, however having the three different buittons to do this looks and feels better
 	private: System::Void AddNewWeightRepSetButton_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		AddToWorkout();
@@ -512,6 +512,8 @@ namespace WorkoutTracker {
 		SetsTextBox->ForeColor = Color::Gray;
 
 		DisplayCurrentWorkout();
+
+		WeightTextBox->Select();
 
 	}
 			 // this is the add to workout button 
@@ -551,6 +553,8 @@ namespace WorkoutTracker {
 		SetsTextBox->ForeColor = Color::Gray;
 
 		DisplayCurrentWorkout();
+
+		ExerciseTextBox->Select();
 
 	}
 
